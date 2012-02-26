@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    -# <link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
+    -# <link href='http://fonts.googleapis.com/css?family=Belgrano|Glegoo' rel='stylesheet' type='text/css'>
+    %link{href: '//fonts.googleapis.com/css?family=Leckerli+One|Belgrano|Gleego', rel: 'stylesheet', type: 'text/css'}
+    
+    %title CookBook
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    #frame
+      .navigation
+        %a.cookbook{href: "/"}
+          Cook Book
+        %span.leaf
+        - if current_user
+          = link_to "My Recipes", recipes_path, class: "nav-item"
+          &nbsp;&nbsp;
+          = link_to "Add Recipes", root_path, class: "nav-item"
+          &nbsp;&nbsp;
+          = link_to ""
+      %br
+      %p.notice= notice
+      %p.alert= alert
+      #content
+        .gingham
+          .content-wrapper
+            = yield

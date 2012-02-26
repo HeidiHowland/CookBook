@@ -1,0 +1,21 @@
+This is where I can see all my recipes
+
+%ul
+  - @categories.each do |cat|
+    %li
+      %strong 
+        = cat.name.titleize
+      %span
+        %i
+          = cat.description
+      %ul
+        - cat.recipes.each do |r|
+          %li
+            %a{href: recipe_path(r.id)}
+              = r.name
+
+-# %ul
+-#   - @recipes.each do |r|
+-#     %li
+-#       %a{href: recipe_path(r.id)}
+-#         = r.name

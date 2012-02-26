@@ -7,8 +7,9 @@ gem 'rails', '3.1.3'
 
 gem 'mysql2'
 gem 'devise'
+gem 'devise_invitable'
 gem 'haml-rails'
-
+gem "declarative_authorization"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -21,6 +22,8 @@ gem 'jquery-rails'
 
 group :test do
   gem 'rspec-rails'
+  gem "awesome_print",             ">=0.3.0",   :require => "ap"
+  
 end
 
 # To use ActiveModel has_secure_password

@@ -1,2 +1,67 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+
+- if user_signed_in?
+  %h1  Add a new recipe
+  %center
+    .signup-form
+      -# - 3.times{|i| @recipe.steps.build }
+      - @recipe.steps.build
+      = form_for @recipe do |f|
+        .fields
+          .label-block
+            = f.label :name, "Category"
+          = select_tag "recipe[category_ids][]", options_from_collection_for_select(Category.all, "id", "name")
+        .fields
+          .label-block
+            = f.label :name, "Name"
+          = f.text_field :name
+        .clear
+        .fields
+          .label-block
+            = f.label :description, "Description"
+          = f.text_field :description
+        .clear
+        .fields
+          .label-block
+          -#   = f.label :recipe_ingredients, "Ingredients"
+          -# <input id="recipe_ingredient_name" name="recipe[ingredient][name]" type="text" value="New York"/>
+
+          = f.fields_for :recipe_ingredients do |ingr|
+            -# = ingr.label :name, "Ingredient"
+            = ingr.text_field :name
+
+        .clear
+        .fields
+          .label-block
+            = f.label :oven_temp, "Oven Temp"
+          = f.text_field :oven_temp, class: "short"
+          .label-block
+            = f.label :servings, "Servings"
+          = f.text_field :servings, class: "short"
+        .clear
+        .fields
+          .label-block
+            = f.label :cook_time, "Cook Time"
+          = f.text_field :cook_time,  class: "short"
+          .label-block
+            = f.label :prep_time, "Prep Time"
+          = f.text_field :prep_time,  class: "short"
+        .clear
+        .fields
+          - step_count = 0
+          = f.fields_for :steps do |s|
+            .label-block
+              = s.label :description, "Step #{step_count += 1}"
+            = s.text_area :description
+        .clear
+        -# .fields
+        -#   = f.fields_for :steps do |s|
+        -#     .label-block
+        -#       = s.label :description, "Step 2"
+        -#     = s.text_area :description
+        -# .clear
+        
+        %center
+          %button{:type => "submit" } Submit
+        .clear
+- else
+  = link_to  "Log in", new_user_session_path

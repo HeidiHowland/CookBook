@@ -1,0 +1,27 @@
+%h1
+  = @recipe.name
+
+= @recipe.description
+
+%h2 Servings
+%span
+  = @recipe.servings
+%br
+.recipe-block
+  %span
+    Oven Temp.
+    = @recipe.oven_temp
+  %br
+  %span
+    Prep. time:
+    = @recipe.prep_time
+  %br
+  %span
+    Cook time:
+    = @recipe.cook_time
+
+%ol
+- @steps.each do |s|
+  %li
+    = s.order
+    = s.description
